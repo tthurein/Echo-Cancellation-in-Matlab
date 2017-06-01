@@ -33,7 +33,7 @@ playblocking(p8);
 
 load farspeech
 x = x(1:length(x));
-dhat = filter(H,1,x);
+dhat = filter(H,1,x);           %filtered far speech, using room impulse H
 plot(t,dhat);
 axis([0 33.5 -1 1]);
 xlabel('Time [sec]');
