@@ -18,6 +18,7 @@ ylabel('Amplitude');
 title('Room Impulse Response');
 set(gcf, 'Color', [1 1 1])
 
+%{
 load nearspeech
 n = 1:length(v);
 t = n/fs;
@@ -31,6 +32,13 @@ pause(1)
 disp('Playing Near-End Speech Signal') %v is near-end
 p8 = audioplayer(v,fs);
 playblocking(p8);
+}%
+
+d = 100; %echo delay
+load 'somesound.wav';
+x = gsig (d+1:end);
+y = gsig (d+1:end) + 0.4*gsig(1:end-d);
+
 
 load farspeech
 x = x(1:length(x));
