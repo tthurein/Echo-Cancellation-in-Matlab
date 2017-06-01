@@ -76,7 +76,7 @@ d = d(1:length(W0)*floor(length(d)/length(W0)));
 
 % Construct the Frequency-Domain Adaptive Filter
 hFDAF = adaptfilt.fdaf(2048,mu,1,del,lam);   %e is after the filter
-[y,e] = filter(hFDAF,x,d);
+[y,e] = filter(hFDAF,x,d);    %d is linear comb of far+near+noise, x is x(1:length(x));
 n = 1:length(e);
 t = n/fs;
 pos = get(gcf,'Position');  % gcf = current figure handle
@@ -84,7 +84,7 @@ set(gcf,'Position',[pos(1), pos(2)-100,pos(3),(pos(4)+85)])
 subplot(3,1,1);
 plot(t,v(n),'g');
 axis([0 33.5 -1 1]);
-ylabel('Amplitude');
+flabel('Amplitude');
 title('Near-End Speech Signal');
 subplot(3,1,2);
 plot(t,d(n),'b');
