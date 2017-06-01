@@ -32,7 +32,7 @@ pause(1)
 disp('Playing Near-End Speech Signal') %v is near-end
 p8 = audioplayer(v,fs);
 playblocking(p8);
-}%
+%}
 
 d = 100; %echo delay
 mySig= audioread('Hello_Echoe.wav');
