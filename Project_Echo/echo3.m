@@ -9,12 +9,11 @@ far-end echoed signal dhat
 using LMS
 
 step 1: generate impulse response of room by FIR filter
-step 2: get sample near-end(speech signal) and play it
-step 3: get sample far-end(echoed signal)and filter it using room impulse
+step 2: get sample far-end(echoed signal)and filter it using room impulse
 response
-step 4: pass the actual signal (unfiltered_near+filtered_far+noise) to
+step 3: pass the actual signal (unfiltered_near+filtered_far+noise) to
 LMS filter
-step 5: measure ERLE, the amount that the echo is attenuated (in dB)
+step 4: measure ERLE, the amount that the echo is attenuated (in dB)
 %}
 
 %Step 1: get room impluse response
@@ -37,7 +36,8 @@ ylabel('Amplitude');
 title('Room Impulse Response');
 set(gcf, 'Color', [1 1 1])
 
-
+%step 2: get sample far-end(echoed signal)and filter it using room impulse
+%response
 mySig = audioread('Hello_Echoe.wav');
 p8 = audioplayer(mySig,fs);
 mySig = mySig(1:length(mySig));
@@ -52,13 +52,14 @@ xlabel('Time [sec]');
 ylabel('Amplitude');
 title('Hello Echo Signal');
 set(gcf, 'Color', [1 1 1])
-pause(1)                        %pause before playing
+pause                        %wait for key press
 disp('Playing Hello Echo Signal') %dhat is far-end
 p8 = audioplayer(dhat,fs);
 playblocking(p8);
 
 d=dhat;
 
+%step 3: pass the echoed signal to LMS filter
 mu = 0.025;                     %sys parameters for LMS
 W0 = zeros(1,2048);
 del = 0.01;
@@ -91,13 +92,13 @@ xlabel('Time [sec]');
 ylabel('Amplitude');
 title('Output of Acoustic Echo Canceller \mu =0.025');
 set(gcf, 'Color', [1 1 1])
-pause(1)                                        %pause before playing
+pause                                        %wait for key press
 disp('Playing mixed Speech Signal after filter mu =0.025')
 p8 = audioplayer(e/max(abs(e)),fs);
 playblocking(p8);
 
 
-%step 5: measure ERLE, the amount that the echo is attenuated (in dB)
+%step 4: measure ERLE, the amount that the echo is attenuated (in dB)
 %35 dB -> 56 times less than original far-end
 %larger step-size -> faster convergence but worst performance (misadjustament)
 Hd2 = dfilt.dffir(ones(1,1000)); %returns a discrete-time, direct-form 
@@ -203,11 +204,11 @@ ylabel('Amplitude');
 title('Output of Acoustic Echo Canceller, \mu = 0.01');
 set(gcf, 'Color', [1 1 1])
 
-pause(1)
+pause
 disp('Playing mixed Speech Signal after filter mu =0.04')
 p8 = audioplayer(e2/max(abs(e2)),fs);
 playblocking(p8);
-pause(1)                                        %pause before playing
+pause                                        %pause before playing
 disp('Playing mixed Speech Signal after filter mu =0.01')
 p8 = audioplayer(e3/max(abs(e3)),fs);
 playblocking(p8);
