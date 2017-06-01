@@ -35,10 +35,11 @@ playblocking(p8);
 }%
 
 d = 100; %echo delay
-load 'somesound.wav';
-x = gsig (d+1:end);
-y = gsig (d+1:end) + 0.4*gsig(1:end-d);
-
+mySig= audioread('Hello_Echoe.wav');
+p8 = audioplayer(mySig,fs);
+playblocking(p8);
+x = mySig (d+1:end);
+y = mySig (d+1:end) + 0.4*mySig(1:end-d);
 
 load farspeech
 x = x(1:length(x));
