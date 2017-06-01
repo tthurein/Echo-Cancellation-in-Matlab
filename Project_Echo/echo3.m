@@ -89,7 +89,7 @@ plot(t,e(n),'r');
 axis([0 5 -1 1]);
 xlabel('Time [sec]');
 ylabel('Amplitude');
-title('Output of Acoustic Echo Canceller');
+title('Output of Acoustic Echo Canceller \mu =0.025');
 set(gcf, 'Color', [1 1 1])
 pause(1)                                        %pause before playing
 disp('Playing mixed Speech Signal after filter mu =0.025')
@@ -108,6 +108,7 @@ setfilter(hFVT,Hd2);
 erle = filter(Hd2,(e-dhat(1:length(e))).^2)./ ...
     (filter(Hd2,dhat(1:length(e)).^2));
 erledB = -10*log10(erle);
+%{
 %
 figure
 %
@@ -115,12 +116,13 @@ plot(t,erledB);
 axis([0 5 0 10]);
 xlabel('Time [sec]');
 ylabel('ERLE [dB]');
-title('Echo Return Loss Enhancement');
+title('Echo Return Loss Enhancement \mu = 0.25');
 set(gcf, 'Color', [1 1 1])
-
+%}
 newmu = 0.04;
 set(hFDAF,'StepSize',newmu);
 [y,e2] = filter(hFDAF,x,d);
+%{
 %
 figure
 %
@@ -145,13 +147,17 @@ title('Output of Acoustic Echo Canceller, \mu = 0.04');
 set(gcf, 'Color', [1 1 1])
 pause(1)                                        %pause before playing
 disp('Playing mixed Speech Signal after filter mu =0.04')
+
 p8 = audioplayer(e2/max(abs(e2)),fs);
 playblocking(p8);
+%}
 
 %close;
+%{
 %
 figure
 %
+
 erle2 = filter(Hd2,(e2-dhat(1:length(e2))).^2)./...
     (filter(Hd2,dhat(1:length(e2)).^2));
 erle2dB = -10*log10(erle2);
@@ -162,10 +168,10 @@ ylabel('ERLE [dB]');
 title('Echo Return Loss Enhancements');
 legend('FDAF, \mu = 0.025','FDAF, \mu = 0.04');
 set(gcf, 'Color', [1 1 1])
-
+%}
 
 %
-newmu3 = 0.02;
+newmu3 = 0.01;
 set(hFDAF,'StepSize',newmu3);
 [y,e3] = filter(hFDAF,x,d);
 %
@@ -194,10 +200,15 @@ plot(t,e3(n),'c');
 axis([0 5 -1 1]);
 xlabel('Time [sec]');
 ylabel('Amplitude');
-title('Output of Acoustic Echo Canceller, \mu = 0.02');
+title('Output of Acoustic Echo Canceller, \mu = 0.01');
 set(gcf, 'Color', [1 1 1])
+
+pause(1)
+disp('Playing mixed Speech Signal after filter mu =0.04')
+p8 = audioplayer(e2/max(abs(e2)),fs);
+playblocking(p8);
 pause(1)                                        %pause before playing
-disp('Playing mixed Speech Signal after filter mu =0.02')
+disp('Playing mixed Speech Signal after filter mu =0.01')
 p8 = audioplayer(e3/max(abs(e3)),fs);
 playblocking(p8);
 
@@ -216,6 +227,6 @@ axis([0 5 0 10]);
 xlabel('Time [sec]');
 ylabel('ERLE [dB]');
 title('Echo Return Loss Enhancements');
-legend('FDAF, \mu = 0.025','FDAF, \mu = 0.04', 'FDAF, \mu = 0.02');
+legend('FDAF, \mu = 0.025','FDAF, \mu = 0.04', 'FDAF, \mu = 0.01');
 set(gcf, 'Color', [1 1 1])
 
