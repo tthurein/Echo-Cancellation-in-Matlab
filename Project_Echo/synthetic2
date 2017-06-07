@@ -96,6 +96,6 @@ ylabel('Amplitude');
 title('Output of Acoustic Echo Canceller \mu =0.025');
 set(gcf, 'Color', [1 1 1])
 pause                                        %wait for key press
-disp('Playing mixed Speech Signal after filter mu =0.025')
+disp('Playing mixed Speech Signal after filter mu =0.002')
 p8 = audioplayer(e/max(abs(e)),fs);
 playblocking(p8);
