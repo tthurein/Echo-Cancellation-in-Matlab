@@ -1,0 +1,4 @@
+Code for echo cancellation.
+1) Processing preloaded Far-end and Near-end Speech Signal.
+2) Processing prerecorded echoed signal
+3) Processing synthetic signal
