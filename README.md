@@ -13,7 +13,8 @@ Echo cancellation in Matlab. Future Developements include:
 
 
 **ERLE**
+
 ![hello_echo2](https://user-images.githubusercontent.com/25523755/27506049-2e84a5c4-5865-11e7-91af-c64c43930e0c.png)
 
-##Synthetic Signal (Before and after)##
+**Synthetic Signal (Before and after)**
 
